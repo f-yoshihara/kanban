@@ -11,6 +11,7 @@ class Task extends Model
         'user_id',
         'cost',
         'loss',
-        'frequency'
+        'frequency',
+        'done_at'
     ];
 }
