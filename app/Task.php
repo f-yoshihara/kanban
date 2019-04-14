@@ -22,8 +22,7 @@ class Task extends Model
         'user_id',
         'title',
         'note',
-        'order',
-        'done_at'
+        'order'
     ];
 
     protected $dates = [
