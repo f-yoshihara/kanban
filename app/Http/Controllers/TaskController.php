@@ -16,7 +16,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::latest()->get();
-        return view( 'tasks.index' );
+        return view('tasks.index')->with('tasks', $tasks);
     }
 
     /**
@@ -41,13 +41,9 @@ class TaskController extends Controller
         $task->user_id = 1;
         $task->title   = $request->title;
         $task->note    = $request->note;
-//        $task->order   = $request->order;
-        $task->order   = 1;
-        $task->done_at = Carbon::now();
-
         $task->save();
 
-        return view( 'home' );
+        return redirect( '/tasks' );
     }
 
     /**
@@ -58,7 +54,9 @@ class TaskController extends Controller
      */
     public function show( $id )
     {
-        return view('tasks.show');
+        $task = Task::find($id);
+
+        return view('tasks.show')->with('task', $task);
     }
 
     /**

@@ -1,17 +1,22 @@
-<html>
-<head>
-    <meta charset='utf-8'>
-</head>
-<body>
-<h1>タスク登録画面</h1>
-<form name="registform" action="/tasks" method="post">
-    {{ csrf_field() }}
-    タイトル：<input type="text" name="title" size="30">
-    <span>{{ $errors->first('title') }}</span><br />
-    備考：<input type="textarea" name="note" rows="4" cols="40">
-    <span>{{ $errors->first('note') }}</span><br />
+@extends('layouts.app')
 
-    <button type='submit' name='action' value='send'>保存</button>
-</form>
-</body>
-</html>
+@section('title', 'Task Detail')
+
+
+@section('content')
+    <div class="container">
+        <h1>Add New</h1>
+        <form method="post" action="{{ url('/tasks') }}">
+            {{ csrf_field() }}
+            <p>
+                <input type="text" name="title" placeholder="title">
+            </p>
+            <p>
+                <textarea name="note" placeholder="note"></textarea>
+            </p>
+            <p>
+                <input type="submit" value="Add New">
+            </p>
+        </form>
+    </div>
+@endsection
