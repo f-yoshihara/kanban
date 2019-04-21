@@ -43,7 +43,7 @@ class TaskController extends Controller
         $task->note    = $request->note;
         $task->save();
 
-        return redirect( '/tasks' );
+        return redirect('/tasks')->with('flash_message', 'Task Added!');
     }
 
     /**
