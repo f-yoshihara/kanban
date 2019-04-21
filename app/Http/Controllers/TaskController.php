@@ -37,6 +37,10 @@ class TaskController extends Controller
      */
     public function store( Request $request )
     {
+        $this->validate($request,[
+            'title' => 'required'
+        ]);
+
         $task          = new Task();
         $task->user_id = 1;
         $task->title   = $request->title;

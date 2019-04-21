@@ -9,7 +9,10 @@
         <form method="post" action="{{ url('/tasks') }}">
             {{ csrf_field() }}
             <p>
-                <input type="text" name="title" placeholder="title">
+                <input type="text" name="title" placeholder="title" value="{{ old('title') }}">
+                @if($errors->has('title'))
+                    <span class="error">{{ $errors->first('title') }}</span>
+                @endif
             </p>
             <p>
                 <textarea name="note" placeholder="note"></textarea>
