@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest;
 use App\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -35,12 +36,8 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store( Request $request )
+    public function store( TaskRequest $request )
     {
-        $this->validate($request,[
-            'title' => 'required'
-        ]);
-
         $task          = new Task();
         $task->user_id = 1;
         $task->title   = $request->title;
@@ -83,12 +80,8 @@ class TaskController extends Controller
      * @param  int                      $id
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update( TaskRequest $request, $id )
     {
-        $this->validate($request,[
-            'title' => 'required'
-        ]);
-
         $task = Task::findOrFail($id);
         $task->user_id = 1;
         $task->title   = $request->title;
