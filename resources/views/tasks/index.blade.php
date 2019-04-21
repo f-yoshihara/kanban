@@ -2,7 +2,6 @@
 
 @section('title', 'Task List')
 
-
 @section('content')
     <div class="container">
         <h1>
@@ -11,7 +10,10 @@
         </h1>
         <ul>
             @forelse ($tasks as $task)
-                <li><a href="{{ action('TaskController@show', $task->id) }}">{{ $task->title }}</a></li>
+                <li>
+                    <a href="{{ action('TaskController@show', $task->id) }}">{{ $task->title }}</a>
+                    <a href="{{ action('TaskController@edit', $task->id) }}" class="fs12">[edit]</a>
+                </li>
             @empty
                 <li>No tasks yet</li>
             @endforelse

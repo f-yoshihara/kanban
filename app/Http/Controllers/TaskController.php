@@ -58,7 +58,7 @@ class TaskController extends Controller
      */
     public function show( $id )
     {
-        $task = Task::find($id);
+        $task = Task::findOrFail($id);
 
         return view('tasks.show')->with('task', $task);
     }
@@ -71,7 +71,9 @@ class TaskController extends Controller
      */
     public function edit( $id )
     {
-        //
+        $task = Task::findOrFail($id);
+
+        return view('tasks.edit')->with('task', $task);
     }
 
     /**
@@ -83,7 +85,17 @@ class TaskController extends Controller
      */
     public function update( Request $request, $id )
     {
+        $this->validate($request,[
+            'title' => 'required'
+        ]);
 
+        $task = Task::findOrFail($id);
+        $task->user_id = 1;
+        $task->title   = $request->title;
+        $task->note    = $request->note;
+        $task->save();
+
+        return redirect('/tasks')->with('flash_message', 'Task Updated!');
     }
 
     /**
