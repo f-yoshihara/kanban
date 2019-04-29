@@ -17,7 +17,8 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::latest()->get();
-        return view('tasks.index')->with('tasks', $tasks);
+
+        return view( 'tasks.index' )->with( 'tasks', $tasks );
     }
 
     /**
@@ -33,7 +34,7 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store( TaskRequest $request )
@@ -44,62 +45,65 @@ class TaskController extends Controller
         $task->note    = $request->note;
         $task->save();
 
-        return redirect('/tasks')->with('flash_message', 'Task Added!');
+        return redirect( '/tasks' )->with( 'flash_message', 'Task Added!' );
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show( $id )
     {
-        $task = Task::findOrFail($id);
+        $task = Task::findOrFail( $id );
 
-        return view('tasks.show')->with('task', $task);
+        return view( 'tasks.show' )->with( 'task', $task );
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit( $id )
     {
-        $task = Task::findOrFail($id);
+        $task = Task::findOrFail( $id );
 
-        return view('tasks.edit')->with('task', $task);
+        return view( 'tasks.edit' )->with( 'task', $task );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      * @return \Illuminate\Http\Response
      */
     public function update( TaskRequest $request, $id )
     {
-        $task = Task::findOrFail($id);
+        $task          = Task::findOrFail( $id );
         $task->user_id = 1;
         $task->title   = $request->title;
         $task->note    = $request->note;
         $task->save();
 
-        return redirect('/tasks')->with('flash_message', 'Task Updated!');
+        return redirect( '/tasks' )->with( 'flash_message', 'Task Updated!' );
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy( $id )
     {
-        //
+        $task = Task::findOrFail( $id );
+        $task->delete();
+
+        return redirect( '/tasks' )->with( 'flash_message', 'Task Deleted!' );
     }
 
 }

@@ -30,4 +30,9 @@ class Task extends Model
         'created_at',
         'updated_at'
     ];
+
+    // task->step
+    public function steps() {
+        return $this->hasMany('App\Step');
+    }
 }

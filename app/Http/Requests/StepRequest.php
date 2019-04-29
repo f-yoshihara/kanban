@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TaskRequest extends FormRequest
+class StepRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,9 @@ class TaskRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required'
-//            TODO:user_id auth実装したら追加する
+            'title'   => 'required',
+            'task_id' => 'required',
+            'order'   => 'required'
         ];
     }
 }

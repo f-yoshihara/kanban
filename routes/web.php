@@ -25,3 +25,5 @@ Route::get('/auth/logout', 'Auth\LoginController@logout');
 
 Route::resource('tasks', 'TaskController');
 
+Route::post('/tasks/{task}/steps', 'StepController@store');
+

@@ -30,4 +30,9 @@ class Step extends Model
         'created_at',
         'updated_at'
     ];
+
+    // step->task
+    public function task() {
+        return $this->belongsTo('App\Task');
+    }
 }
